@@ -5,6 +5,8 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 // import "antd/dist/antd.css";
 import 'antd/dist/reset.css';
+import Product from "./pages/Product/Product";
+
 
 function App() {
   return (
@@ -14,7 +16,8 @@ function App() {
         <BrowserRouter>
             <Routes>
                 <Route path="/login" element={<Login />} />
-                <Route path="/home" element={<Home />} />
+                <Route path="/products" element={<Home />} />
+                <Route path="/products/:id" element={<Product />} />
             </Routes>
         </BrowserRouter>
     </div>

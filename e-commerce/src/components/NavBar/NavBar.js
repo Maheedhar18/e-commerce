@@ -1,5 +1,5 @@
 import React from 'react'
-import ShoppingCartOutlined from '@ant-design/icons';
+import {ShoppingCartOutlined} from '@ant-design/icons';
 
 
 const NavBar = () => {
@@ -8,9 +8,10 @@ const NavBar = () => {
              <div>E-cart</div>
              <div className='flex items-center'>
              <div>Profile</div>
-             <div className='mx-8'>Menu</div>
-             <div>Cart</div>
-             <div><ShoppingCartOutlined /></div>
+             <div className='ml-8 mr-6'>Menu</div>
+             {/* <div>Cart</div> */}
+             <div className='flex items-center'><ShoppingCartOutlined className='text-[24px]'/></div>
+
              </div>
 
     </div>
