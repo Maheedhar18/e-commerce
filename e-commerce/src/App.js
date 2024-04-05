@@ -2,7 +2,7 @@ import NavBar from "./components/NavBar/NavBar";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 // import "antd/dist/antd.css";
 import 'antd/dist/reset.css';
 import Product from "./pages/Product/Product";
@@ -16,8 +16,9 @@ function App() {
   return (
     <div class=" h-screen ">
       <NavBar cartItems={cartItems} />
-      <div className="w-[60%] m-auto py-20">
+      <div className="w-[70%] m-auto py-20">
         <Routes>
+          <Route path="/" element={<Navigate replace to="/products" />} />
           <Route path="/login" element={<Login />} />
           <Route path="/products" element={<Home />} />
           <Route path="/products/:id" element={<Product cartItems={cartItems} setCartItems={setCartItems} />} />

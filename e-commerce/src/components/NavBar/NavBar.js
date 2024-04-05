@@ -39,7 +39,7 @@ const NavBar = ({ cartItems }) => {
     };
 
     getData();
-  }, []);
+  }, [localStorage.getItem("token")]);
 
   const handleSignOut = () => {
     setAuth({ isAuthenticated: false, user: null });
@@ -49,48 +49,71 @@ const NavBar = ({ cartItems }) => {
 
   const navigate = useNavigate();
   return (
-    <div className="px-[160px] py-4 flex justify-between items-center bg-blue-400">
+    <div className="px-[160px] py-4 flex justify-between items-center bg-[#007BFF]">
       <div
         className="cursor-pointer"
         onClick={() => {
           navigate("/products");
         }}
       >
-        E-cart
+        <div className="flex items-center">
+         
+            <img
+              className="w-8 h-8"
+              src="https://cdn-icons-png.freepik.com/512/3225/3225194.png"
+            />
+         
+          <div className="flex items-center">
+            <span className="text-[32px] text-white flex ml-4">ShopConnect</span>
+            
+          </div>
+        </div>
       </div>
       <div className="flex items-center">
-        
-
         <div
-          className="flex items-center ml-6 mr-6 cursor-pointer"
+          className="flex items-center cursor-pointer text-[24px]"
           onClick={() => {
             navigate("/cart");
           }}
         >
           <Badge count={cartItems.length}>
-            <ShoppingCartOutlined className="text-[24px]" />
+            <ShoppingCartOutlined className="text-[24px] text-white" />
           </Badge>
         </div>
 
-        <div className="cursor-pointer">
+        <div className="mx-6 text-white text-[18px] flex items-center">
+          {auth.isAuthenticated && (
+            <>
+              <div
+                className="cursor-pointer mr-4"
+                onClick={() => {
+                  navigate("/profile");
+                }}
+              >
+                <UserOutlined /><span className="ml-2">{auth.data.firstName}</span>
+              </div>
+              {/* <div className="mr-4 ml-1">{auth.data.firstName}</div> */}
+              <div onClick={handleSignOut} className="link cursor-pointer ">
+                Sign Out
+              </div>
+            </>
+          )}
+          {!auth.isAuthenticated && (
+            <>
+              <div
+                onClick={() => {
+                  navigate("/login");
+                }}
+                className="cursor-pointer"
+              >
+                Login
+              </div>
+            </>
+          )}
+        </div>
+        <div className="cursor-pointer text-white text-[24px]">
           <MenuOutlined />
         </div>
-        {auth.isAuthenticated && (
-          <>
-            <div className="cursor-pointer" onClick={() => {
-            navigate("/profile");
-          }}>
-            <UserOutlined />
-            </div>
-            <div>{auth.data.firstName}</div>
-            <button onClick={handleSignOut} className="link">Sign Out</button>
-          </>
-        )}
-        {!auth.isAuthenticated && (
-          <>
-            <button onClick={() => {navigate("/login");}} className="cursor-pointer">Login</button>
-          </>
-        )}
       </div>
     </div>
   );

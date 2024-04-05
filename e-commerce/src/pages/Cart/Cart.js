@@ -43,7 +43,7 @@ const Cart = ({ cartItems, setCartItems }) => {
 
                 }) : <div>Add items to your cart!</div>
             }
-            <div>Total : {calculateTotalPrice(cartItems)}</div>
+            <div className='flex w-full items-center justify-center text-[32px]'>Total : {calculateTotalPrice(cartItems)}</div>
 
         </div>
     )
