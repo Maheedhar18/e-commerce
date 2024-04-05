@@ -17,3 +17,18 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* TODO: Add support for other browsers */
+::-webkit-scrollbar-thumb {
+  background-color: rgb(226, 219, 219);
+  outline: 0 solid rgb(242, 246, 250);
+}

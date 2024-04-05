@@ -6,22 +6,24 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 // import "antd/dist/antd.css";
 import 'antd/dist/reset.css';
 import Product from "./pages/Product/Product";
+import { useState } from "react";
+import Cart from "./pages/Cart/Cart";
 
 
 function App() {
+  const [cartItems, setCartItems] = useState([])
   return (
     <div class=" h-screen ">
-    <NavBar/>
-    <div className="w-[60%] m-auto py-20">
-        <BrowserRouter>
-            <Routes>
-                <Route path="/login" element={<Login />} />
-                <Route path="/products" element={<Home />} />
-                <Route path="/products/:id" element={<Product />} />
-            </Routes>
-        </BrowserRouter>
+      <NavBar cartItems={cartItems} />
+      <div className="w-[60%] m-auto py-20">
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/products/:id" element={<Product cartItems={cartItems} setCartItems={setCartItems} />} />
+          <Route path="/cart" element={<Cart cartItems={cartItems} setCartItems={setCartItems} />} />
+        </Routes>
+      </div>
     </div>
-</div>
 
   );
 }

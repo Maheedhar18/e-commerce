@@ -1,18 +1,14 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Carousel } from "antd";
+import { Button } from 'antd';
+import { Carousel } from 'antd';
 
-const Product = () => {
-  const contentStyle = {
-    height: "160px",
-    color: "#fff",
-    lineHeight: "160px",
-    textAlign: "center",
-    background: "#364d79",
-  };
+const Product = ({ cartItems, setCartItems }) => {
+  const navigate = useNavigate()
+
   let { id } = useParams();
-  const [product, setProduct] = useState();
+  const [product, setProduct] = useState(null);
   useEffect(() => {
     fetchProductDetails(id);
   }, [id]);
@@ -30,33 +26,46 @@ const Product = () => {
     return <div>Loading...</div>;
   }
 
+
   return (
     <div>
-      <div className=" ">
-        <div>
-          {/* <Carousel effect="fade" className="">
-            {product?.images?.map((image, index) => (
-              <div
-                key={index}
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  height: "300px",
-                }}
-              >
-               
-                <img
-                  src={image}
-                  alt={`Slide ${index}`}
-                  style={{ width: "auto", height: "100%", objectFit: "cover" }}
-                />
-              </div>
-            ))}
-          </Carousel> */}
-        </div>
+      <div>
+        <Button onClick={() => {
+          navigate(-1);
+        }}>Back</Button>
       </div>
+
+      <Carousel className="mt-4">
+        {product?.images.map((item, index) => (
+          <div key={index} style={{ display: 'flex', justifyContent: 'center' }}>
+            <img
+              src={item}
+              style={{
+                maxWidth: '100%',
+                maxHeight: '50vh',
+                objectFit: 'contain',
+              }}
+              alt={`Image ${index + 1}`}
+            />
+          </div>
+        ))}
+      </Carousel>
+      <div className="flex w-full justify-center font-semibold text-[28px] my-4">{product.title}</div>
+      <div className="my-4">{product.description}</div>
+      <div className="flex justify-between items-center ">
+        <div><span>Brand :</span> {product.brand}</div>
+        <div><span>Price :</span> {product.price}$</div>
+        <div><span>Rating :</span>{product.rating}/5</div>
+        <div><span>Offer :</span>{product.discountPercentage}%</div>
+      </div>
+      <div className="flex w-full justify-center mt-4" onClick={() => {
+        let tempItems = cartItems;
+        setCartItems([...tempItems, product])
+      }}><Button>Add to cart</Button></div>
+
+
     </div>
+
   );
 };
 

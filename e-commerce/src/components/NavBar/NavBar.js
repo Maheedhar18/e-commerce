@@ -1,20 +1,26 @@
 import React from 'react'
-import {ShoppingCartOutlined} from '@ant-design/icons';
+import { ShoppingCartOutlined, UserOutlined, MenuOutlined } from '@ant-design/icons';
+import { Badge } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 
-const NavBar = () => {
+const NavBar = ({ cartItems }) => {
+  const navigate = useNavigate()
   return (
     <div className='px-[160px] py-4 flex justify-between items-center bg-blue-400'>
-             <div>E-cart</div>
-             <div className='flex items-center'>
-             <div>Profile</div>
-             <div className='ml-8 mr-6'>Menu</div>
-             {/* <div>Cart</div> */}
-             <div className='flex items-center'><ShoppingCartOutlined className='text-[24px]'/></div>
+      <div className='cursor-pointer' onClick={() => { navigate('/products') }}>E-cart</div>
+      <div className='flex items-center'>
+        <div className='cursor-pointer'><UserOutlined /></div>
 
-             </div>
+        <div className='flex items-center ml-6 mr-6 cursor-pointer' onClick={() => { navigate('/cart') }}><Badge count={cartItems.length}><ShoppingCartOutlined className='text-[24px]' /></Badge></div>
 
-    </div>
+        <div className='cursor-pointer'><MenuOutlined /></div>
+
+
+
+      </div>
+
+    </div >
   )
 }
 
