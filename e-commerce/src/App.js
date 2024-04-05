@@ -8,6 +8,7 @@ import 'antd/dist/reset.css';
 import Product from "./pages/Product/Product";
 import { useState } from "react";
 import Cart from "./pages/Cart/Cart";
+import Profile from "./pages/Profile/profile";
 
 
 function App() {
@@ -18,9 +19,10 @@ function App() {
       <div className="w-[60%] m-auto py-20">
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route path="/" element={<Home />} />
+          <Route path="/products" element={<Home />} />
           <Route path="/products/:id" element={<Product cartItems={cartItems} setCartItems={setCartItems} />} />
           <Route path="/cart" element={<Cart cartItems={cartItems} setCartItems={setCartItems} />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </div>
     </div>
